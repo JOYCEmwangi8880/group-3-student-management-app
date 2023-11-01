@@ -1,27 +1,28 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Students from './components/Students'
+import Students  from './components/Students'
 
 function App() {
    const BASE_URL ='http://localhost:3000/studentsData'
-
-  const student ={
-    name:'',
-subject:'',
-marks:'',
-}
-const [data, setData] =useState(student)
-const [users, setUsers]= useState([])
+ 
+//   const student ={
+//     name:'',
+// subject:''
+// marks:'',
+// }
+const [data, setData] =useState({name:'', subject:'', marks:''})
+const [students, setStudents]= useState([]);
 
 
 function handleFormData (e) {
   
   setData ({...data, [e.target.name]:e.target.value})
+  console.log(data)
 }
 
 function handleSubmit(e){
   e.preventDefault()
-  console.log('ha')
+  
 
 
 
@@ -32,18 +33,21 @@ fetch(BASE_URL, {
   headers: {
     'Content-Type': 'application/json',
   },
-  body:JSON.stringify (student)
+  body:JSON.stringify (data)
   
 
 })
 .then((res)=> res.json())
-.then((stud) => setData(...data, stud)  )
+.then((stud) => {
+  setStudents([...students, stud])
+  setData({name:'', subject:'', marks:''})}  )
 }
 useEffect(()=> {
   fetch(BASE_URL)
-  .then((res)=> res.json)
-  .then((data)=> setData(data))
+  .then((res)=> res.json())
+  .then((data)=> setStudents(data))
 },[])
+
 
 
 return (
@@ -58,12 +62,18 @@ return (
 
 </form>
 
+<div>
+  { students.map((student) =>(
+
+< Students key={student.id}   students={students}  setStudents={setStudents} id={student.id} name={student.name} subject={student.subject} marks={student.marks} />
+
+  ))}
+</div>
 
 
 
 
-      <Students/>
-      </div>
+ </div>
      
    
   )

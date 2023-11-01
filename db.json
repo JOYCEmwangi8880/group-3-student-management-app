@@ -1,22 +1,10 @@
 {
   "studentsData": [
     {
-      "name": "",
-      "subject": "",
-      "marks": "",
-      "id": 1
-    },
-    {
-      "name": "",
-      "subject": "",
-      "marks": "",
+      "name": "isaac",
+      "subject": "kiswa",
+      "marks": "02",
       "id": 2
-    },
-    {
-      "name": "",
-      "subject": "",
-      "marks": "",
-      "id": 3
     }
   ]
 }
